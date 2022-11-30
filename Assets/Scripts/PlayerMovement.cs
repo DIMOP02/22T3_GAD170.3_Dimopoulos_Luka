@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 12f;
     [SerializeField] private float horizontalSpeed = 2.0f;
     [SerializeField] private float verticalSpeed = 2.0f;
+    private Animator animator;
 
     // These two are for the camera movement
     [SerializeField] private float yaw = 0.0f;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         // If the variable "characterController" is empty...
         if (characterController == null)
         {
