@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LukaDimopoulos
 {
     public class KillRespawn : MonoBehaviour
     {
+        public int Respawn;
         // Start is called before the first frame update
         void Start()
         {
@@ -16,6 +18,14 @@ namespace LukaDimopoulos
         void Update()
         {
 
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                SceneManager.LoadScene(Respawn);
+            }
         }
     }
 }
