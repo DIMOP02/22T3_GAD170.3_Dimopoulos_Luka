@@ -24,9 +24,36 @@ namespace LukaDimopoulos
         // We dont want the blocks to turn tnagible on Start...
         // We want them to turn tangible when the SWITCH IS TRIGGERED
         //private void Start()
-        //{
-        //      TurnIntangible();
-        //}
+
+        // TURN OFF AFTER X SECONDS
+        // ? needs a timer
+        // - make counter countdown to zero
+        // - needs to check if timer has run out
+        // - turns intangible after the timer has run out
+        // have a way to reset the timer
+
+        [SerializeField] private float intagibilityCountdownTimer = 5f;
+        [SerializeField] private float intagibilityCountdownTimerReset = 5f;
+
+        private void OnEnable()
+        {
+            EventsManager.OnButtonBonkEvent += TurnTangible;
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnColourChangeEvent -= TurnTangible;
+        }
+
+        private void Update()
+        {
+            intagibilityCountdownTimer -= Time.deltaTime;
+
+            if(intagibilityCountdownTimer > 0 && block.GetComponent<BoxCollider>().enabled == true)
+            {
+                TurnTangible();
+            }
+        }
         private void TurnTangible()
         {
             // if the box collider is enabled...

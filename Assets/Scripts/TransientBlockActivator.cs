@@ -6,7 +6,23 @@ namespace LukaDimopoulos
 {
     public class TransientBlockActivator : MonoBehaviour
     {
-        
+        [SerializeField] private bool isPlayerCharacterNearby = false;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.name == "Avatar")
+            {
+                isPlayerCharacterNearby = false;
+            }
+        }
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.E) && isPlayerCharacterNearby == true)
+            {
+                EventsManager.OnButtonBonkEvent?.Invoke();
+                Debug.Log("E has been pressed");
+            }
+        }
     }
 }
 
