@@ -8,16 +8,18 @@ namespace LukaDimopoulos
     {
         Animator animator;
         public KeyCode WKey;
+        private bool isWalking;
         // Start is called before the first frame update
         void Start()
         {
-            Animator animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
+            isWalking = true;
         }
 
         // Update is called once per frame
         void Update()
         {
-            bool isWalking = animator.GetBool("isWalking");
+            isWalking = animator.GetBool("isWalking");
             bool forwardPressed = Input.GetKey(WKey);
             //  if player presses w key...
             if (!isWalking && forwardPressed)

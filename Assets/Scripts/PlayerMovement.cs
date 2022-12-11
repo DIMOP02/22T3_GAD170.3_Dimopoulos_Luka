@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -39,10 +40,14 @@ public class PlayerMovement : MonoBehaviour
 
     // To handle vertical movement
     private Vector3 velocity;
+    private AudioClip jumpSound;
+    static AudioSource audioSrc;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        jumpSound = (AudioClip)Resources.Load("jumpsound");
+        audioSrc = GetComponent<AudioSource>();
         // If the variable "characterController" is empty...
         if (characterController == null)
         {
@@ -64,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         // Let the character jump if they are on the ground and they press the jump button
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            audioSrc.PlayOneShot(jumpSound);
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 

@@ -10,7 +10,15 @@ namespace LukaDimopoulos
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.name == "Avatar")
+            if(other.gameObject.name == "Player Character")
+            {
+                isPlayerCharacterNearby = true;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.gameObject.name == "Player Character")
             {
                 isPlayerCharacterNearby = false;
             }

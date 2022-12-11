@@ -32,8 +32,8 @@ namespace LukaDimopoulos
         // - turns intangible after the timer has run out
         // have a way to reset the timer
 
-        [SerializeField] private float intagibilityCountdownTimer = 5f;
-        [SerializeField] private float intagibilityCountdownTimerReset = 5f;
+        [SerializeField] private float intangibilityCountdownTimer = 8f;
+        [SerializeField] private float intangibilityCountdownTimerReset = 8f;
 
         private void OnEnable()
         {
@@ -42,19 +42,20 @@ namespace LukaDimopoulos
 
         private void OnDisable()
         {
-            EventsManager.OnColourChangeEvent -= TurnTangible;
+            EventsManager.OnButtonBonkEvent -= TurnTangible;
         }
 
         private void Update()
         {
-            intagibilityCountdownTimer -= Time.deltaTime;
+            intangibilityCountdownTimer -= Time.deltaTime;
 
-            if(intagibilityCountdownTimer > 0 && block.GetComponent<BoxCollider>().enabled == true)
+            if(intangibilityCountdownTimer < 0 && block.GetComponent<BoxCollider>().enabled == true)
             {
-                TurnTangible();
+                TurnIntangible();
+                Debug.Log("Floors have disappeard...");
             }
         }
-        private void TurnTangible()
+        private void TurnIntangible()
         {
             // if the box collider is enabled...
             if (block.GetComponent<BoxCollider>().enabled == true)
@@ -65,16 +66,19 @@ namespace LukaDimopoulos
                 block.GetComponent<MeshRenderer>().material = intangibleMaterial;
             }
         }
-        private void TurnIntangible()
+        private void TurnTangible()
         {
-            // if the box collider is enabled...
+            // if the box collider is disabled...
             if (block.GetComponent<BoxCollider>().enabled == false)
             {
-                // ...disable the box collider
+                // ...enable the box collider
                 block.GetComponent<BoxCollider>().enabled = true;
-                // and change the material to "Intangible" material
+                // and change the material to "Tangible" material
                 block.GetComponent<MeshRenderer>().material = tangibleMaterial;
             }
+
+            intangibilityCountdownTimer = intangibilityCountdownTimerReset;
+
         }
     }
 

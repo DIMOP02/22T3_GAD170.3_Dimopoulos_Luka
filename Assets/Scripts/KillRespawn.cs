@@ -24,7 +24,7 @@ namespace LukaDimopoulos
         {
             if (other.CompareTag("Player"))
             {
-                SceneManager.LoadScene(Respawn);
+                SceneManager.LoadScene(1);
             }
         }
     }

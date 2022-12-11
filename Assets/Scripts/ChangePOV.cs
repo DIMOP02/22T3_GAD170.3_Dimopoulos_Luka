@@ -9,16 +9,16 @@ namespace LukaDimopoulos
         public Transform Player;
         public Camera MainCamera, FrontCamera;
         public KeyCode CKey;
-        public bool camSwitch = false;
+        public bool isMainCameraEnabled = false;
 
         // Update is called once per frame
         void Update()
         {
             if (Input.GetKeyDown(CKey))
             {
-                camSwitch = !camSwitch;
-                MainCamera.gameObject.SetActive(camSwitch);
-                FrontCamera.gameObject.SetActive(!camSwitch);
+                isMainCameraEnabled = !isMainCameraEnabled;
+                MainCamera.gameObject.SetActive(isMainCameraEnabled);
+                FrontCamera.gameObject.SetActive(!isMainCameraEnabled);
             }
         }
     }
